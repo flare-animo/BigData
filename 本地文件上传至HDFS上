@@ -1,0 +1,22 @@
+package hive.jdbc;
+/*
+*  本地文件上传至HDFS上
+* */
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+public class UploadToHDFS {
+    @Test
+    public void testcopyfile() throws IOException,InterruptedException ,URISyntaxException  {
+        Configuration conf = new Configuration();
+        FileSystem fs = FileSystem.get(new URI("hdfs://你的IP:8020"),conf,"Guess");  //Guess 改为你的当前用户名 
+        fs.copyFromLocalFile(new Path("1"),new Path("2"));     //1.本地路径  2.hdfs路径
+        fs.close();
+    }
+}
